@@ -132,7 +132,7 @@ class App extends Component {
             </div>
             <div>
               <button
-                type="button"
+                type="submit"
                 className="submit-stu-info"
                 disabled={!this.state.newStudent}
                 onClick={this.handleSubmit}

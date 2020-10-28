@@ -10,6 +10,8 @@ class App extends Component {
       students: [],
       group: [],
       showGroup: false,
+      showInput: false,
+      newStudent: '',
     };
   }
 
@@ -57,6 +59,37 @@ class App extends Component {
     return groupStu;
   };
 
+  handleAddStudent = () => {
+    this.setState({
+      showInput: true,
+    });
+  };
+
+  handelInput = (event) => {
+    this.setState({
+      newStudent: event.target.value,
+    });
+  };
+
+  handleSubmit = () => {
+    http
+      .post('/student', {
+        id: null,
+        name: this.state.newStudent,
+      })
+      .then(() => {
+        alert('添加成功');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({
+      showInput: false,
+      newStudent: '',
+    });
+    this.getAllStudents();
+  };
+
   render() {
     return (
       <div data-testid="app" className="App">
@@ -84,9 +117,35 @@ class App extends Component {
             <Student key={student.id} id={student.id} name={student.name} />
           ))}
         </div>
-        <button type="button" className="add-student">
-          +添加学员
-        </button>
+        {this.state.showInput ? (
+          <form>
+            <div className="new-stu-info">
+              <label htmlFor="stu-name">
+                请输入学生姓名:
+                <input
+                  type="text"
+                  id="stu-name"
+                  value={this.state.newStudent}
+                  onChange={this.handelInput}
+                />
+              </label>
+            </div>
+            <div>
+              <button
+                type="button"
+                className="submit-stu-info"
+                disabled={!this.state.newStudent}
+                onClick={this.handleSubmit}
+              >
+                提交
+              </button>
+            </div>
+          </form>
+        ) : (
+          <button type="button" className="add-student" onClick={this.handleAddStudent}>
+            +添加学员
+          </button>
+        )}
       </div>
     );
   }

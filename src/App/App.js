@@ -16,10 +16,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // TODO GTB-完成度: - 应该同时请求分组和学员列表，不然每次刷新页面后，没办法显示分组
     this.getAllStudents();
   }
 
   getAllStudents = () => {
+    // TODO GTB-工程实践: * 建议进一步把数据请求按照业务提取到单独的service
     http
       .get('/students')
       .then((res) => {
@@ -46,6 +48,7 @@ class App extends Component {
       });
   };
 
+  // TODO GTB-完成度: * 分组逻辑应该在后端实现，然后再返回到前端
   GroupStudents = (data) => {
     const num = parseInt(data.length / 6, 10);
     const remain = data.length % 6;
@@ -92,6 +95,8 @@ class App extends Component {
 
   render() {
     return (
+      // TODO GTB-知识点: * div嵌套过深
+      // TODO GTB-知识点: * 没有使用语义标签
       <div data-testid="app" className="App">
         <h2>分组列表</h2>
         <button type="button" className="group-student" onClick={this.getGroupStudents}>

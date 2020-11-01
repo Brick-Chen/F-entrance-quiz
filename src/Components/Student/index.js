@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import './student.scss';
 
 class Student extends Component {
   render() {
     return (
       <div className="student">
-        {this.props.id}. {this.props.name}
+        <p>
+          {this.props.id}. {this.props.name}
+        </p>
       </div>
     );
   }

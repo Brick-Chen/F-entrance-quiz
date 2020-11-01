@@ -1,3 +1,40 @@
 .App {
   background-color: #f7f7f7;
 }
+
+.add-student {
+  border: gray solid 0.5px;
+  color: gray;
+  width: 120px;
+  height: 40px;
+  margin: 10px 10px;
+}
+
+.students {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.stu-list-header {
+  margin: 10px 10px;
+}
+
+.students-group {
+  margin: 10px 10px;
+}
+
+.stu-group-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.group-student {
+  background-color: red;
+  color: white;
+  border: none;
+  height: 40px;
+  align-self: center;
+  text-align: center;
+  width: 150px;
+}

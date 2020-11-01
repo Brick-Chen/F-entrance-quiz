@@ -93,59 +93,65 @@ class App extends Component {
   render() {
     return (
       <div data-testid="app" className="App">
-        <h2>分组列表</h2>
-        <button type="button" className="group-student" onClick={this.getGroupStudents}>
-          分组学员
-        </button>
-        {this.state.showGroup ? (
-          <div>
-            {this.state.group.map((item, index) => (
-              <div>
-                <div>第{index + 1}组</div>
-                {item.map((student) => (
-                  <Student key={student.id} id={student.id} name={student.name} />
-                ))}
-              </div>
+        <div className="students-group">
+          <div className="stu-group-header">
+            <h2>分组列表</h2>
+            <button type="button" className="group-student" onClick={this.getGroupStudents}>
+              分组学员
+            </button>
+          </div>
+          {this.state.showGroup ? (
+            <div>
+              {this.state.group.map((item, index) => (
+                <div>
+                  <div>第{index + 1}组</div>
+                  {item.map((student) => (
+                    <Student key={student.id} id={student.id} name={student.name} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+        <div className="student-list">
+          <h2 className="stu-list-header">学员列表</h2>
+          <div className="students">
+            {this.state.students.map((student) => (
+              <Student key={student.id} id={student.id} name={student.name} />
             ))}
           </div>
-        ) : (
-          ''
-        )}
-        <h2>学员列表</h2>
-        <div className="students-list">
-          {this.state.students.map((student) => (
-            <Student key={student.id} id={student.id} name={student.name} />
-          ))}
+          {this.state.showInput ? (
+            <form>
+              <div className="new-stu-info">
+                <label htmlFor="stu-name">
+                  请输入学生姓名:
+                  <input
+                    type="text"
+                    id="stu-name"
+                    value={this.state.newStudent}
+                    onChange={this.handelInput}
+                  />
+                </label>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="submit-stu-info"
+                  disabled={!this.state.newStudent}
+                  onClick={this.handleSubmit}
+                >
+                  提交
+                </button>
+              </div>
+            </form>
+          ) : (
+            <button type="button" className="add-student" onClick={this.handleAddStudent}>
+              +添加学员
+            </button>
+          )}
         </div>
-        {this.state.showInput ? (
-          <form>
-            <div className="new-stu-info">
-              <label htmlFor="stu-name">
-                请输入学生姓名:
-                <input
-                  type="text"
-                  id="stu-name"
-                  value={this.state.newStudent}
-                  onChange={this.handelInput}
-                />
-              </label>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="submit-stu-info"
-                disabled={!this.state.newStudent}
-                onClick={this.handleSubmit}
-              >
-                提交
-              </button>
-            </div>
-          </form>
-        ) : (
-          <button type="button" className="add-student" onClick={this.handleAddStudent}>
-            +添加学员
-          </button>
-        )}
       </div>
     );
   }

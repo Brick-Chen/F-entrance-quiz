@@ -40,7 +40,7 @@ class App extends Component {
       .then((res) => {
         this.setState({
           showGroup: true,
-          group: this.GroupStudents(res.data),
+          group: res.data,
         });
       })
       .catch((err) => {
@@ -49,18 +49,6 @@ class App extends Component {
   };
 
   // TODO GTB-完成度: * 分组逻辑应该在后端实现，然后再返回到前端
-  GroupStudents = (data) => {
-    const num = parseInt(data.length / 6, 10);
-    const remain = data.length % 6;
-    const groupStu = [];
-    for (let i = 0; i < num * 6; i += num) {
-      groupStu.push(data.slice(i, i + num));
-    }
-    for (let j = 0; j < remain; j += 1) {
-      groupStu[j].push(data[6 * num + j]);
-    }
-    return groupStu;
-  };
 
   handleAddStudent = () => {
     this.setState({
@@ -108,11 +96,13 @@ class App extends Component {
           {this.state.showGroup ? (
             <div>
               {this.state.group.map((item, index) => (
-                <div>
-                  <div>第{index + 1}组</div>
-                  {item.map((student) => (
-                    <Student key={student.id} id={student.id} name={student.name} />
-                  ))}
+                <div className="group">
+                  <div className="group-title">{index + 1} 组</div>
+                  <div className="group-member">
+                    {item.map((student) => (
+                      <Student key={student.id} id={student.id} name={student.name} />
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>

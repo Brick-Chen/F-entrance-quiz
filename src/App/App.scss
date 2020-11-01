@@ -8,6 +8,7 @@
   width: 120px;
   height: 40px;
   margin: 10px 10px;
+  background-color: #f7f7f7;
 }
 
 .students {
@@ -37,4 +38,23 @@
   align-self: center;
   text-align: center;
   width: 150px;
+}
+
+.group-title {
+  text-align: center;
+  color: white;
+  background-color: #949ba9;
+  font-size: 20px;
+}
+
+.group-member {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.group {
+  border: gray solid 1px;
+  margin: 20px 0;
 }
